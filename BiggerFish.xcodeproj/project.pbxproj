@@ -1,0 +1,382 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8408D030277958D800B99448 /* BiggerFishApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8408D02F277958D800B99448 /* BiggerFishApp.swift */; };
+		8408D032277958D800B99448 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8408D031277958D800B99448 /* ContentView.swift */; };
+		8408D034277958DB00B99448 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8408D033277958DB00B99448 /* Assets.xcassets */; };
+		8408D037277958DB00B99448 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8408D036277958DB00B99448 /* Preview Assets.xcassets */; };
+		8408D03E2779590600B99448 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8408D03D2779590600B99448 /* GameScene.swift */; };
+		8408D0402779596400B99448 /* Bubbles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8408D03F2779596400B99448 /* Bubbles.sks */; };
+		8408D04227795CB000B99448 /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8408D04127795CB000B99448 /* Gradient.swift */; };
+		8408D044277965B600B99448 /* EnemyNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8408D043277965B600B99448 /* EnemyNode.swift */; };
+		841E7082277FA0AD00358CB0 /* chomp.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 841E7081277FA0AD00358CB0 /* chomp.mp3 */; };
+		845AC7FD277C117700859304 /* bubble.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 845AC7FC277C117600859304 /* bubble.mp3 */; };
+		8495A838277ABEF800F88851 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8495A837277ABEF800F88851 /* CustomButton.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		8408D02C277958D800B99448 /* BiggerFish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BiggerFish.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8408D02F277958D800B99448 /* BiggerFishApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiggerFishApp.swift; sourceTree = "<group>"; };
+		8408D031277958D800B99448 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8408D033277958DB00B99448 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8408D036277958DB00B99448 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8408D03D2779590600B99448 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		8408D03F2779596400B99448 /* Bubbles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Bubbles.sks; sourceTree = "<group>"; };
+		8408D04127795CB000B99448 /* Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
+		8408D043277965B600B99448 /* EnemyNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyNode.swift; sourceTree = "<group>"; };
+		841E7081277FA0AD00358CB0 /* chomp.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = chomp.mp3; sourceTree = "<group>"; };
+		845AC7FC277C117600859304 /* bubble.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bubble.mp3; sourceTree = "<group>"; };
+		8495A837277ABEF800F88851 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8408D029277958D800B99448 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8408D023277958D800B99448 = {
+			isa = PBXGroup;
+			children = (
+				8408D02E277958D800B99448 /* BiggerFish */,
+				8408D02D277958D800B99448 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8408D02D277958D800B99448 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8408D02C277958D800B99448 /* BiggerFish.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8408D02E277958D800B99448 /* BiggerFish */ = {
+			isa = PBXGroup;
+			children = (
+				8408D02F277958D800B99448 /* BiggerFishApp.swift */,
+				8408D031277958D800B99448 /* ContentView.swift */,
+				8408D03D2779590600B99448 /* GameScene.swift */,
+				8408D043277965B600B99448 /* EnemyNode.swift */,
+				8408D04127795CB000B99448 /* Gradient.swift */,
+				8495A837277ABEF800F88851 /* CustomButton.swift */,
+				8408D03F2779596400B99448 /* Bubbles.sks */,
+				845AC7FE277C119300859304 /* Audio */,
+				8408D033277958DB00B99448 /* Assets.xcassets */,
+				8408D035277958DB00B99448 /* Preview Content */,
+			);
+			path = BiggerFish;
+			sourceTree = "<group>";
+		};
+		8408D035277958DB00B99448 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				8408D036277958DB00B99448 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		845AC7FE277C119300859304 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				841E7081277FA0AD00358CB0 /* chomp.mp3 */,
+				845AC7FC277C117600859304 /* bubble.mp3 */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8408D02B277958D800B99448 /* BiggerFish */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8408D03A277958DB00B99448 /* Build configuration list for PBXNativeTarget "BiggerFish" */;
+			buildPhases = (
+				8408D028277958D800B99448 /* Sources */,
+				8408D029277958D800B99448 /* Frameworks */,
+				8408D02A277958D800B99448 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BiggerFish;
+			productName = BiggerFish;
+			productReference = 8408D02C277958D800B99448 /* BiggerFish.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8408D024277958D800B99448 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1310;
+				LastUpgradeCheck = 1310;
+				TargetAttributes = {
+					8408D02B277958D800B99448 = {
+						CreatedOnToolsVersion = 13.1;
+					};
+				};
+			};
+			buildConfigurationList = 8408D027277958D800B99448 /* Build configuration list for PBXProject "BiggerFish" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8408D023277958D800B99448;
+			productRefGroup = 8408D02D277958D800B99448 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8408D02B277958D800B99448 /* BiggerFish */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8408D02A277958D800B99448 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				845AC7FD277C117700859304 /* bubble.mp3 in Resources */,
+				841E7082277FA0AD00358CB0 /* chomp.mp3 in Resources */,
+				8408D037277958DB00B99448 /* Preview Assets.xcassets in Resources */,
+				8408D0402779596400B99448 /* Bubbles.sks in Resources */,
+				8408D034277958DB00B99448 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8408D028277958D800B99448 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8408D044277965B600B99448 /* EnemyNode.swift in Sources */,
+				8408D03E2779590600B99448 /* GameScene.swift in Sources */,
+				8495A838277ABEF800F88851 /* CustomButton.swift in Sources */,
+				8408D032277958D800B99448 /* ContentView.swift in Sources */,
+				8408D030277958D800B99448 /* BiggerFishApp.swift in Sources */,
+				8408D04227795CB000B99448 /* Gradient.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		8408D038277958DB00B99448 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		8408D039277958DB00B99448 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8408D03B277958DB00B99448 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"BiggerFish/Preview Content\"";
+				DEVELOPMENT_TEAM = UY79DE276H;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = admin.BiggerFish;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8408D03C277958DB00B99448 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"BiggerFish/Preview Content\"";
+				DEVELOPMENT_TEAM = UY79DE276H;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = admin.BiggerFish;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8408D027277958D800B99448 /* Build configuration list for PBXProject "BiggerFish" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8408D038277958DB00B99448 /* Debug */,
+				8408D039277958DB00B99448 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8408D03A277958DB00B99448 /* Build configuration list for PBXNativeTarget "BiggerFish" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8408D03B277958DB00B99448 /* Debug */,
+				8408D03C277958DB00B99448 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8408D024277958D800B99448 /* Project object */;
+}
