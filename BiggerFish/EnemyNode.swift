@@ -9,6 +9,11 @@ import SpriteKit
 
 enum EnemyTypes {
     case fish
+    case redFish
+    case pinkFish
+    case blueFish
+    case orangeFish
+    case grayFish
     case puffer
     case rock
 }
@@ -25,6 +30,8 @@ class EnemyNode: SKSpriteNode {
         
         var fishId = ""
         
+        self.enemyType = .fish
+        
         let randomPufferNum = Int.random(in: 0...14)
         if randomPufferNum == 0 {
             fishId = "fishTile_100"
@@ -32,15 +39,14 @@ class EnemyNode: SKSpriteNode {
         } else {
             let randomFishNum = Int.random(in: 0...4)
             switch randomFishNum {
-            case 0: fishId = "fishTile_078"
-            case 1: fishId = "fishTile_074"
-            case 2: fishId = "fishTile_076"
-            case 3: fishId = "fishTile_080"
-            case 4: fishId = "fishTile_102"
+            case 0: fishId = "fishTile_078"; self.enemyType = .redFish
+            case 1: fishId = "fishTile_074"; self.enemyType = .pinkFish // pink
+            case 2: fishId = "fishTile_076"; self.enemyType = .blueFish // blue
+            case 3: fishId = "fishTile_080"; self.enemyType = .orangeFish // orange
+            case 4: fishId = "fishTile_102"; self.enemyType = .grayFish // gray
             default:
                 fishId = "fishTile_078"
             }
-            self.enemyType = .fish
         }
 
         let enemyTexture = SKTexture(imageNamed: fishId)

@@ -39,11 +39,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     
     override func didMove(to view: SKView) {
         
-        // Run bubble audio loop
-//        let bubbleBackgroundSound = SKAudioNode(fileNamed: "bubble")
-//        bubbleBackgroundSound.autoplayLooped = true
-//        addChild(bubbleBackgroundSound)
-        
         playBackgroundMusic()
         
         physicsWorld.gravity = .zero
@@ -121,22 +116,42 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     // MARK: - Physics/Collision
     
     func didBegin(_ contact: SKPhysicsContact) {
-        guard let nodeA = contact.bodyA.node else { return }
-        guard let nodeB = contact.bodyB.node else { return }
+        var playerNode: SKNode {
+            if contact.bodyA.node?.name == "player" {
+                return contact.bodyA.node!
+            } else if contact.bodyB.node?.name == "player" {
+                return contact.bodyB.node!
+            }
+            return SKNode()
+        }
+        var enemyNode: SKNode {
+            if contact.bodyA.node?.name == "enemy" {
+                return contact.bodyA.node!
+            } else if contact.bodyB.node?.name == "enemy" {
+                return contact.bodyB.node!
+            }
+            return SKNode()
+        }
         
         // Kill on every pufferfish touch
-        let enemy = nodeB as? EnemyNode
+        let enemy = enemyNode as? EnemyNode
         if enemy?.enemyType == .puffer {
             gameOver()
             return
         }
         
+        var enemySizeKillMargin = 0.95
+        
+        if enemy?.enemyType == .pinkFish {
+            enemySizeKillMargin = 0.70
+        }
+        
         // Player is bigger than fish
-        if nodeA.frame.width > (nodeB.frame.width * 0.90) || nodeA.frame.height > (nodeB.frame.height * 0.90){
+        if playerNode.frame.width > (enemyNode.frame.width * enemySizeKillMargin) || playerNode.frame.height > (enemyNode.frame.height * enemySizeKillMargin){
             playGulpSound()
-            nodeB.removeFromParent()
-            player.scale(to: CGSize(width: player.size.width + nodeB.frame.size.width/10,
-                                    height: player.size.height + nodeB.frame.size.width/10))
+            enemyNode.removeFromParent()
+            player.scale(to: CGSize(width: player.size.width + enemyNode.frame.size.width/10,
+                                    height: player.size.height + enemyNode.frame.size.width/10))
             self.score += 1
         // Fish is bigger than player
         } else {
@@ -147,6 +162,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     // MARK: - Nodes
     
     func createPlayer() {
+        player.setScale(1.0)
         player.name = "player"
         player.position.x = frame.width / 2
         player.position.y = UIScreen.main.bounds.height/7
