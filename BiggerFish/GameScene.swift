@@ -33,8 +33,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     var spawnTimer:Timer?
     var spawnRateIncreaseTimer:Timer?
     
-    // Audio
-    var audioPlayer:AVAudioPlayer?
+    // Audio players
+    var backgroundAudioPlayer:AVAudioPlayer?
+    var foregroundAudioPlayer:AVAudioPlayer?
     
     override func didMove(to view: SKView) {
         
@@ -117,7 +118,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         self.createEnemy(enemyScale: randomSize, enemySpeed: randomSpeed)
     }
     
-    // MARK: - Physics
+    // MARK: - Physics/Collision
     
     func didBegin(_ contact: SKPhysicsContact) {
         guard let nodeA = contact.bodyA.node else { return }
@@ -130,11 +131,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
             return
         }
         
-        if nodeA.frame.width > (nodeB.frame.width * 0.95) || nodeA.frame.height > (nodeB.frame.height * 0.95){
+        // Player is bigger than fish
+        if nodeA.frame.width > (nodeB.frame.width * 0.90) || nodeA.frame.height > (nodeB.frame.height * 0.90){
+            playGulpSound()
             nodeB.removeFromParent()
             player.scale(to: CGSize(width: player.size.width + nodeB.frame.size.width/10,
                                     height: player.size.height + nodeB.frame.size.width/10))
             self.score += 1
+        // Fish is bigger than player
         } else {
             gameOver()
         }
@@ -199,16 +203,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     
     func playBackgroundMusic() {
         let backgroundMusicUrl = Bundle.main.url(forResource: "bubble", withExtension: "mp3")
-        try! audioPlayer = AVAudioPlayer(contentsOf: backgroundMusicUrl!)
-        audioPlayer?.volume = 0.5
-        audioPlayer?.numberOfLoops = -1
-        audioPlayer?.play()
+        try! backgroundAudioPlayer = AVAudioPlayer(contentsOf: backgroundMusicUrl!)
+        backgroundAudioPlayer?.volume = 0.5
+        backgroundAudioPlayer?.numberOfLoops = -1
+        backgroundAudioPlayer?.play()
     }
     
     func playDeathSound() {
         let deathSoundUrl = Bundle.main.url(forResource: "chomp", withExtension: "mp3")
-        try! audioPlayer = AVAudioPlayer(contentsOf: deathSoundUrl!)
-        audioPlayer?.play()
+        try! foregroundAudioPlayer = AVAudioPlayer(contentsOf: deathSoundUrl!)
+        foregroundAudioPlayer?.play()
+    }
+    
+    func playGulpSound() {
+        let randomGulpNumber = Int.random(in: 0...4)
+        let gulpSoundUrl = Bundle.main.url(forResource: "gulp\(randomGulpNumber)", withExtension: "mp3")
+        try! foregroundAudioPlayer = AVAudioPlayer(contentsOf: gulpSoundUrl!)
+        foregroundAudioPlayer?.play()
     }
 }
 
