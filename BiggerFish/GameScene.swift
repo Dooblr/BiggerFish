@@ -66,6 +66,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         }
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.isPaused.toggle()
+    }
+    
     // Creates player and starts creating enemies
     func startGame() {
         
@@ -109,7 +113,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     
     @objc func spawnTimerFunc() {
         let randomSize = Double.random(in: 0.25...3)
-        let randomSpeed = Int.random(in: 50...200)
+        let randomSpeed = Double.random(in: 50...200)
         self.createEnemy(enemyScale: randomSize, enemySpeed: randomSpeed)
     }
     
@@ -181,7 +185,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
 //        player.physicsBody?.allowsRotation = false
     }
     
-    func createEnemy(enemyScale:Double, enemySpeed:Int) {
+    func createEnemy(enemyScale:Double, enemySpeed:Double) {
         let enemy = EnemyNode(enemyScale: enemyScale, enemySpeed: enemySpeed)
         addChild(enemy)
     }

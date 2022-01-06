@@ -21,10 +21,10 @@ enum EnemyTypes {
 class EnemyNode: SKSpriteNode {
     
     var enemyScale:Double
-    var enemySpeed:Int
+    var enemySpeed:Double
     var enemyType:EnemyTypes
     
-    init(enemyScale:Double,enemySpeed:Int) {
+    init(enemyScale:Double,enemySpeed:Double) {
         self.enemyScale = enemyScale
         self.enemySpeed = enemySpeed
         
@@ -40,10 +40,10 @@ class EnemyNode: SKSpriteNode {
             let randomFishNum = Int.random(in: 0...4)
             switch randomFishNum {
             case 0: fishId = "fishTile_078"; self.enemyType = .redFish
-            case 1: fishId = "fishTile_074"; self.enemyType = .pinkFish // pink
-            case 2: fishId = "fishTile_076"; self.enemyType = .blueFish // blue
-            case 3: fishId = "fishTile_080"; self.enemyType = .orangeFish // orange
-            case 4: fishId = "fishTile_102"; self.enemyType = .grayFish // gray
+            case 1: fishId = "fishTile_074"; self.enemyType = .pinkFish
+            case 2: fishId = "fishTile_076"; self.enemyType = .blueFish
+            case 3: fishId = "fishTile_080"; self.enemyType = .orangeFish
+            case 4: fishId = "fishTile_102"; self.enemyType = .grayFish
             default:
                 fishId = "fishTile_078"
             }
@@ -67,17 +67,45 @@ class EnemyNode: SKSpriteNode {
         let startX = Int.random(in: 0...Int(UIScreen.main.bounds.width))
         position = CGPoint(x: startX, y: Int(UIScreen.main.bounds.height) + 100)
         
-
-        configureMovement(moveStraight:true)
+        configureMovement(type: self.enemyType)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureMovement(moveStraight:Bool) {
+    func configureMovement(type: EnemyTypes) {
+        
         let path = UIBezierPath()
         path.move(to: .zero)
+        
+        if type == .grayFish {
+            let zigZagX = UIScreen.main.bounds.width / 5
+            path.addLine(to: CGPoint(x: zigZagX, y: -zigZagX * 2))
+            path.addLine(to: CGPoint(x: -zigZagX, y: -zigZagX * 4))
+            path.addLine(to: CGPoint(x: zigZagX, y: -zigZagX * 6))
+            path.addLine(to: CGPoint(x: -zigZagX, y: -zigZagX * 8))
+            path.addLine(to: CGPoint(x: zigZagX, y: -zigZagX * 10))
+        }
+        if type == .redFish {
+            self.enemyScale *= 1.25
+            self.enemySpeed *= 0.75
+        }
+        if type == .orangeFish {
+            self.enemyScale *= 0.75
+            self.enemySpeed *= 0.75
+        }
+        if type == .blueFish {
+            let startYBias:CGFloat = 200
+            
+            path.addCurve(to: CGPoint(x: 0, y: (-UIScreen.main.bounds.height - startYBias)/2),
+                          controlPoint1: CGPoint(x: -UIScreen.main.bounds.width*0.33, y: (-UIScreen.main.bounds.height - startYBias) * 0.125),
+                          controlPoint2: CGPoint(x: UIScreen.main.bounds.width*0.33, y: (-UIScreen.main.bounds.height - startYBias) * 0.375))
+            
+            path.addCurve(to: CGPoint(x: 0, y: -UIScreen.main.bounds.height - startYBias),
+                          controlPoint1: CGPoint(x: -UIScreen.main.bounds.width*0.33, y: (-UIScreen.main.bounds.height - startYBias) * 0.625),
+                          controlPoint2: CGPoint(x: UIScreen.main.bounds.width*0.33, y: (-UIScreen.main.bounds.height - startYBias) * 0.825))
+        }
         
         path.addLine(to: CGPoint(x: 0, y: -10000))
         
