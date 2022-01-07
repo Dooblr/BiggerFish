@@ -51,6 +51,10 @@ class EnemyNode: SKSpriteNode {
 
         let enemyTexture = SKTexture(imageNamed: fishId)
         
+        if self.enemyType == .puffer {
+            self.enemyScale = 0.5
+        }
+        
         super.init(texture: enemyTexture, color:.white, size: CGSize(width: enemyTexture.size().width * enemyScale,
                                                                 height: enemyTexture.size().height * enemyScale))
         
@@ -64,6 +68,7 @@ class EnemyNode: SKSpriteNode {
         physicsBody?.contactTestBitMask = CollisionType.player.rawValue
         // Set name
         name = "enemy"
+        
         let startX = Int.random(in: 0...Int(UIScreen.main.bounds.width))
         position = CGPoint(x: startX, y: Int(UIScreen.main.bounds.height) + 100)
         
@@ -79,6 +84,7 @@ class EnemyNode: SKSpriteNode {
         let path = UIBezierPath()
         path.move(to: .zero)
         
+        // Gray fish zig zag path
         if type == .grayFish {
             let zigZagX = UIScreen.main.bounds.width / 5
             path.addLine(to: CGPoint(x: zigZagX, y: -zigZagX * 2))
@@ -87,14 +93,8 @@ class EnemyNode: SKSpriteNode {
             path.addLine(to: CGPoint(x: -zigZagX, y: -zigZagX * 8))
             path.addLine(to: CGPoint(x: zigZagX, y: -zigZagX * 10))
         }
-        if type == .redFish {
-            self.enemyScale *= 1.25
-            self.enemySpeed *= 0.75
-        }
-        if type == .orangeFish {
-            self.enemyScale *= 0.75
-            self.enemySpeed *= 0.75
-        }
+        
+        // Blue fish curve path
         if type == .blueFish {
             let startYBias:CGFloat = 200
             

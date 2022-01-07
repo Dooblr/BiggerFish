@@ -8,6 +8,7 @@
 import SpriteKit
 import CoreMotion
 import AVFoundation
+import SwiftUI
 
 // Bitmasks for collision
 enum CollisionType: UInt32 {
@@ -24,8 +25,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     
     // Player node
     let player = SKSpriteNode(imageNamed: "fishTile_072")
+    
     @Published var isShowingGameOverScreen = false
+    @Published var isHighScore = false
+    @Published var highScoreNameInput = ""
     @Published var isShowingTitleScreen = true
+    @Published var showPauseView = false
+    @Published var isShowingHighScores = false
     @Published var score = 0
     
     var runCount = 0
@@ -36,8 +42,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     // Audio players
     var backgroundAudioPlayer:AVAudioPlayer?
     var foregroundAudioPlayer:AVAudioPlayer?
+    var interfaceAudioPlayer:AVAudioPlayer?
+    
+    // High Scores
+    let userDefaults = UserDefaults.standard
+//    let highScores = [
+//        "Dan":2,
+//        "Rosie":3,
+//        "Alysha":4,
+//        "Larry":5,
+//        "Nancy":6,
+//    ]
     
     override func didMove(to view: SKView) {
+        
+        if userDefaults.dictionary(forKey: "HighScoresDict") == nil {
+            let emptyDict = [String:Int]()
+            userDefaults.set(emptyDict, forKey: "HighScoresDict")
+        }
         
         playBackgroundMusic()
         
@@ -67,7 +89,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // Pause on touch and show pause view
+        showPauseView.toggle()
         self.isPaused.toggle()
+        playPauseSound()
     }
     
     // Creates player and starts creating enemies
@@ -96,9 +121,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     }
     
     func gameOver(){
+        // Death audio
         playDeathSound()
+        // Remove the player
         player.removeFromParent()
-        self.isShowingGameOverScreen = true
+        
+        // Get high scores and check if player score is greater
+        if score > 0 {
+            var highScores = userDefaults.dictionary(forKey: "HighScoresDict") as! [String:Int]
+            // If there are 5 high scores, remove the lowest
+            if highScores.count == 5 {
+                let lowestScore = highScores.min { a, b in a.value < b.value }
+                if score > lowestScore!.value {
+                    isHighScore = true
+                }
+            } else {
+                isHighScore = true
+            }
+        }
+        
+        // Show the game over screen
+        isShowingGameOverScreen = true
+        // Stop the spawn timer and spawn rate timer
         spawnTimer?.invalidate()
         spawnRateIncreaseTimer?.invalidate()
     }
@@ -112,7 +156,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     }
     
     @objc func spawnTimerFunc() {
-        let randomSize = Double.random(in: 0.25...3)
+        let randomSize = Double.random(in: 0.25...2)
         let randomSpeed = Double.random(in: 50...200)
         self.createEnemy(enemyScale: randomSize, enemySpeed: randomSpeed)
     }
@@ -120,6 +164,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     // MARK: - Physics/Collision
     
     func didBegin(_ contact: SKPhysicsContact) {
+        
         var playerNode: SKNode {
             if contact.bodyA.node?.name == "player" {
                 return contact.bodyA.node!
@@ -144,8 +189,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
             return
         }
         
+        // Eat if bigger than 95% of enemy
         var enemySizeKillMargin = 0.95
         
+        // Fix weird pinkfish hitbox issue
         if enemy?.enemyType == .pinkFish {
             enemySizeKillMargin = 0.70
         }
@@ -208,7 +255,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     }
     
     func createBubbles() {
-        // MARK: - Bubbles
         if let bubbles = SKEmitterNode(fileNamed: "Bubbles") {
             bubbles.position = CGPoint(x: 0, y: 0)
             // Set particles behind other elements
@@ -240,6 +286,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         let gulpSoundUrl = Bundle.main.url(forResource: "gulp\(randomGulpNumber)", withExtension: "mp3")
         try! foregroundAudioPlayer = AVAudioPlayer(contentsOf: gulpSoundUrl!)
         foregroundAudioPlayer?.play()
+    }
+    
+    func playPauseSound() {
+        var pauseSoundUrl:URL?
+        if showPauseView == false {
+            pauseSoundUrl = Bundle.main.url(forResource: "pauseOff", withExtension: "wav")
+        } else {
+            pauseSoundUrl = Bundle.main.url(forResource: "pauseOn", withExtension: "wav")
+        }
+        try! interfaceAudioPlayer = AVAudioPlayer(contentsOf: pauseSoundUrl!)
+        interfaceAudioPlayer?.volume = 0.7
+        interfaceAudioPlayer?.play()
     }
 }
 

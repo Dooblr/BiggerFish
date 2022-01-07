@@ -16,6 +16,14 @@
 		8408D04227795CB000B99448 /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8408D04127795CB000B99448 /* Gradient.swift */; };
 		8408D044277965B600B99448 /* EnemyNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8408D043277965B600B99448 /* EnemyNode.swift */; };
 		841E7082277FA0AD00358CB0 /* chomp.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 841E7081277FA0AD00358CB0 /* chomp.mp3 */; };
+		843A74592787DEF0003BD19B /* ScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843A74582787DEF0003BD19B /* ScoreView.swift */; };
+		843A745B2787E02D003BD19B /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843A745A2787E02D003BD19B /* TitleView.swift */; };
+		843A745D2787E04F003BD19B /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843A745C2787E04F003BD19B /* GameOverView.swift */; };
+		843A745F2787E0BF003BD19B /* PauseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843A745E2787E0BF003BD19B /* PauseView.swift */; };
+		843A74622787E30D003BD19B /* pauseOff.wav in Resources */ = {isa = PBXBuildFile; fileRef = 843A74602787E30D003BD19B /* pauseOff.wav */; };
+		843A74632787E30D003BD19B /* pauseOn.wav in Resources */ = {isa = PBXBuildFile; fileRef = 843A74612787E30D003BD19B /* pauseOn.wav */; };
+		843A74652787F30F003BD19B /* HighScoresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843A74642787F30F003BD19B /* HighScoresView.swift */; };
+		843A74682787F6B5003BD19B /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 843A74672787F6B5003BD19B /* OrderedCollections */; };
 		84555DF3277FACE20006FD72 /* gulp4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 84555DEE277FACE20006FD72 /* gulp4.mp3 */; };
 		84555DF4277FACE20006FD72 /* gulp2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 84555DEF277FACE20006FD72 /* gulp2.mp3 */; };
 		84555DF5277FACE20006FD72 /* gulp3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 84555DF0277FACE20006FD72 /* gulp3.mp3 */; };
@@ -36,6 +44,13 @@
 		8408D04127795CB000B99448 /* Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
 		8408D043277965B600B99448 /* EnemyNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyNode.swift; sourceTree = "<group>"; };
 		841E7081277FA0AD00358CB0 /* chomp.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = chomp.mp3; sourceTree = "<group>"; };
+		843A74582787DEF0003BD19B /* ScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreView.swift; sourceTree = "<group>"; };
+		843A745A2787E02D003BD19B /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
+		843A745C2787E04F003BD19B /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
+		843A745E2787E0BF003BD19B /* PauseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseView.swift; sourceTree = "<group>"; };
+		843A74602787E30D003BD19B /* pauseOff.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pauseOff.wav; sourceTree = "<group>"; };
+		843A74612787E30D003BD19B /* pauseOn.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pauseOn.wav; sourceTree = "<group>"; };
+		843A74642787F30F003BD19B /* HighScoresView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighScoresView.swift; sourceTree = "<group>"; };
 		84555DEE277FACE20006FD72 /* gulp4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gulp4.mp3; sourceTree = "<group>"; };
 		84555DEF277FACE20006FD72 /* gulp2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gulp2.mp3; sourceTree = "<group>"; };
 		84555DF0277FACE20006FD72 /* gulp3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gulp3.mp3; sourceTree = "<group>"; };
@@ -50,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				843A74682787F6B5003BD19B /* OrderedCollections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +93,7 @@
 			children = (
 				8408D02F277958D800B99448 /* BiggerFishApp.swift */,
 				8408D031277958D800B99448 /* ContentView.swift */,
+				843A74572787DEB2003BD19B /* Interface Views */,
 				8408D03D2779590600B99448 /* GameScene.swift */,
 				8408D043277965B600B99448 /* EnemyNode.swift */,
 				8408D04127795CB000B99448 /* Gradient.swift */,
@@ -97,6 +114,18 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		843A74572787DEB2003BD19B /* Interface Views */ = {
+			isa = PBXGroup;
+			children = (
+				843A74582787DEF0003BD19B /* ScoreView.swift */,
+				843A745A2787E02D003BD19B /* TitleView.swift */,
+				843A745C2787E04F003BD19B /* GameOverView.swift */,
+				843A745E2787E0BF003BD19B /* PauseView.swift */,
+				843A74642787F30F003BD19B /* HighScoresView.swift */,
+			);
+			path = "Interface Views";
+			sourceTree = "<group>";
+		};
 		84555DED277FACDB0006FD72 /* gulps */ = {
 			isa = PBXGroup;
 			children = (
@@ -112,6 +141,8 @@
 		845AC7FE277C119300859304 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				843A74602787E30D003BD19B /* pauseOff.wav */,
+				843A74612787E30D003BD19B /* pauseOn.wav */,
 				84555DED277FACDB0006FD72 /* gulps */,
 				841E7081277FA0AD00358CB0 /* chomp.mp3 */,
 				845AC7FC277C117600859304 /* bubble.mp3 */,
@@ -135,6 +166,9 @@
 			dependencies = (
 			);
 			name = BiggerFish;
+			packageProductDependencies = (
+				843A74672787F6B5003BD19B /* OrderedCollections */,
+			);
 			productName = BiggerFish;
 			productReference = 8408D02C277958D800B99448 /* BiggerFish.app */;
 			productType = "com.apple.product-type.application";
@@ -163,6 +197,9 @@
 				Base,
 			);
 			mainGroup = 8408D023277958D800B99448;
+			packageReferences = (
+				843A74662787F6B5003BD19B /* XCRemoteSwiftPackageReference "swift-collections" */,
+			);
 			productRefGroup = 8408D02D277958D800B99448 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -177,7 +214,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				843A74622787E30D003BD19B /* pauseOff.wav in Resources */,
 				845AC7FD277C117700859304 /* bubble.mp3 in Resources */,
+				843A74632787E30D003BD19B /* pauseOn.wav in Resources */,
 				841E7082277FA0AD00358CB0 /* chomp.mp3 in Resources */,
 				84555DF5277FACE20006FD72 /* gulp3.mp3 in Resources */,
 				84555DF6277FACE20006FD72 /* gulp0.mp3 in Resources */,
@@ -197,12 +236,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				843A74592787DEF0003BD19B /* ScoreView.swift in Sources */,
 				8408D044277965B600B99448 /* EnemyNode.swift in Sources */,
 				8408D03E2779590600B99448 /* GameScene.swift in Sources */,
 				8495A838277ABEF800F88851 /* CustomButton.swift in Sources */,
 				8408D032277958D800B99448 /* ContentView.swift in Sources */,
 				8408D030277958D800B99448 /* BiggerFishApp.swift in Sources */,
+				843A74652787F30F003BD19B /* HighScoresView.swift in Sources */,
 				8408D04227795CB000B99448 /* Gradient.swift in Sources */,
+				843A745F2787E0BF003BD19B /* PauseView.swift in Sources */,
+				843A745D2787E04F003BD19B /* GameOverView.swift in Sources */,
+				843A745B2787E02D003BD19B /* TitleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +449,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		843A74662787F6B5003BD19B /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		843A74672787F6B5003BD19B /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 843A74662787F6B5003BD19B /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8408D024277958D800B99448 /* Project object */;
 }

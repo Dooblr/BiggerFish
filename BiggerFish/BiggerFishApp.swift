@@ -13,6 +13,7 @@ struct BiggerFishApp: App {
         WindowGroup {
             ContentView()
                 .statusBar(hidden: true)
+                .environmentObject(GameScene())
         }
     }
 }
