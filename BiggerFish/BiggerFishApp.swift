@@ -14,6 +14,7 @@ struct BiggerFishApp: App {
             ContentView()
                 .statusBar(hidden: true)
                 .environmentObject(GameScene())
+                .environmentObject(InterfaceControls())
         }
     }
 }

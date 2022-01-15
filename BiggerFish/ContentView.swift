@@ -11,6 +11,7 @@ import SpriteKit
 struct ContentView: View {
     
     @EnvironmentObject var gameScene:GameScene
+    @EnvironmentObject var interfaceControls:InterfaceControls
     
     var body: some View {
         ZStack {
@@ -20,24 +21,26 @@ struct ContentView: View {
                 .zIndex(-1)
             
             // Score Overlay
-            if !gameScene.isShowingTitleScreen && !gameScene.isShowingHighScores {
+            if InterfaceControls.interfaceState != .title && InterfaceControls.interfaceState != .highScores {
                 ScoreView()
             }
             // Title screen
-            if gameScene.isShowingTitleScreen {
+            if InterfaceControls.interfaceState == .title {
                 TitleView()
             // Game over overlay
-            } else if gameScene.isShowingGameOverScreen && !gameScene.isShowingHighScores {
+            }
+            
+            if InterfaceControls.interfaceState == .gameOver {
                 GameOverView()
             }
             
             // Pause overlay
-            if gameScene.showPauseView {
+            if InterfaceControls.interfaceState == .paused {
                 PauseView()
             }
             
             // High Scores
-            if gameScene.isShowingHighScores {
+            if InterfaceControls.interfaceState == .highScores {
                 HighScoresView()
             }
         }

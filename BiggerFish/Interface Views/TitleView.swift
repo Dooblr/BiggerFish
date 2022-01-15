@@ -10,29 +10,28 @@ import SwiftUI
 struct TitleView: View {
     
     @EnvironmentObject var gameScene:GameScene
+    @EnvironmentObject var interfaceControls:InterfaceControls
     
     var body: some View {
         VStack {
+            
+            // Title
             Text("Bigger Fish")
                 .font(.largeTitle)
                 .padding()
+            
+            // Play Button
             Button {
-                gameScene.isShowingTitleScreen = false
-                gameScene.isShowingGameOverScreen = false
+                InterfaceControls.interfaceState = .playing
                 gameScene.startGame()
             } label: {
                 CustomButton(text: "Play", color: .green)
             }
             
-            // TODO: - Settings & Leaderboards
-//            Button {
-//                
-//            } label: {
-//                CustomButton(text: "Settings", color: .blue)
-//            }
+            // High scores button
             Button {
-                gameScene.isShowingTitleScreen = false
-                gameScene.isShowingHighScores = true
+                InterfaceControls.interfaceState = .highScores
+                gameScene.reload.toggle()
             } label: {
                 CustomButton(text: "High Scores", color: .yellow)
             }

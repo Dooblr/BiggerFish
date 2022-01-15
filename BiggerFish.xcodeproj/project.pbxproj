@@ -29,6 +29,8 @@
 		84555DF5277FACE20006FD72 /* gulp3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 84555DF0277FACE20006FD72 /* gulp3.mp3 */; };
 		84555DF6277FACE20006FD72 /* gulp0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 84555DF1277FACE20006FD72 /* gulp0.mp3 */; };
 		84555DF7277FACE20006FD72 /* gulp1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 84555DF2277FACE20006FD72 /* gulp1.mp3 */; };
+		845674CA278C2F5B0022A229 /* HighScoresListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845674C9278C2F5B0022A229 /* HighScoresListView.swift */; };
+		845674CC278C30B10022A229 /* InterfaceControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845674CB278C30B10022A229 /* InterfaceControls.swift */; };
 		845AC7FD277C117700859304 /* bubble.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 845AC7FC277C117600859304 /* bubble.mp3 */; };
 		8495A838277ABEF800F88851 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8495A837277ABEF800F88851 /* CustomButton.swift */; };
 /* End PBXBuildFile section */
@@ -56,6 +58,8 @@
 		84555DF0277FACE20006FD72 /* gulp3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gulp3.mp3; sourceTree = "<group>"; };
 		84555DF1277FACE20006FD72 /* gulp0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gulp0.mp3; sourceTree = "<group>"; };
 		84555DF2277FACE20006FD72 /* gulp1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gulp1.mp3; sourceTree = "<group>"; };
+		845674C9278C2F5B0022A229 /* HighScoresListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighScoresListView.swift; sourceTree = "<group>"; };
+		845674CB278C30B10022A229 /* InterfaceControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceControls.swift; sourceTree = "<group>"; };
 		845AC7FC277C117600859304 /* bubble.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bubble.mp3; sourceTree = "<group>"; };
 		8495A837277ABEF800F88851 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,6 +99,7 @@
 				8408D031277958D800B99448 /* ContentView.swift */,
 				843A74572787DEB2003BD19B /* Interface Views */,
 				8408D03D2779590600B99448 /* GameScene.swift */,
+				845674CB278C30B10022A229 /* InterfaceControls.swift */,
 				8408D043277965B600B99448 /* EnemyNode.swift */,
 				8408D04127795CB000B99448 /* Gradient.swift */,
 				8495A837277ABEF800F88851 /* CustomButton.swift */,
@@ -117,11 +122,12 @@
 		843A74572787DEB2003BD19B /* Interface Views */ = {
 			isa = PBXGroup;
 			children = (
-				843A74582787DEF0003BD19B /* ScoreView.swift */,
 				843A745A2787E02D003BD19B /* TitleView.swift */,
+				843A74582787DEF0003BD19B /* ScoreView.swift */,
 				843A745C2787E04F003BD19B /* GameOverView.swift */,
 				843A745E2787E0BF003BD19B /* PauseView.swift */,
 				843A74642787F30F003BD19B /* HighScoresView.swift */,
+				845674C9278C2F5B0022A229 /* HighScoresListView.swift */,
 			);
 			path = "Interface Views";
 			sourceTree = "<group>";
@@ -237,8 +243,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				843A74592787DEF0003BD19B /* ScoreView.swift in Sources */,
+				845674CA278C2F5B0022A229 /* HighScoresListView.swift in Sources */,
 				8408D044277965B600B99448 /* EnemyNode.swift in Sources */,
 				8408D03E2779590600B99448 /* GameScene.swift in Sources */,
+				845674CC278C30B10022A229 /* InterfaceControls.swift in Sources */,
 				8495A838277ABEF800F88851 /* CustomButton.swift in Sources */,
 				8408D032277958D800B99448 /* ContentView.swift in Sources */,
 				8408D030277958D800B99448 /* BiggerFishApp.swift in Sources */,

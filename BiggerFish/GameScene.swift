@@ -25,14 +25,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     
     // Player node
     let player = SKSpriteNode(imageNamed: "fishTile_072")
+
     
-    @Published var isShowingGameOverScreen = false
+//    @Published var showPauseView = false
     @Published var isHighScore = false
     @Published var highScoreNameInput = ""
-    @Published var isShowingTitleScreen = true
-    @Published var showPauseView = false
-    @Published var isShowingHighScores = false
     @Published var score = 0
+    // Triggers UI reload from static InterfaceControls changes
+    @Published var reload = false
     
     var runCount = 0
     var spawnTimerInterval = 3.0
@@ -44,15 +44,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     var foregroundAudioPlayer:AVAudioPlayer?
     var interfaceAudioPlayer:AVAudioPlayer?
     
-    // High Scores
+    // User defaults reference
     let userDefaults = UserDefaults.standard
-//    let highScores = [
-//        "Dan":2,
-//        "Rosie":3,
-//        "Alysha":4,
-//        "Larry":5,
-//        "Nancy":6,
-//    ]
     
     override func didMove(to view: SKView) {
         
@@ -89,10 +82,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        // Pause on touch and show pause view
-        showPauseView.toggle()
-        self.isPaused.toggle()
-        playPauseSound()
+        
+        // Only run this code while game is playing or paused
+        if InterfaceControls.interfaceState == .playing || InterfaceControls.interfaceState == .paused {
+            // If game is paused, switch it to playing, and vice versa
+            if InterfaceControls.interfaceState == .paused {
+                InterfaceControls.interfaceState = .playing
+            } else {
+                InterfaceControls.interfaceState = .paused
+            }
+            
+            // Trigger interface reload
+            reload.toggle()
+            
+            // Toggle SK game pause state
+            self.isPaused.toggle()
+            
+            // Play pause audio
+            playPauseSound()
+        }
     }
     
     // Creates player and starts creating enemies
@@ -111,6 +119,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
             }
         }
         
+        // Create player
         createPlayer()
         
         // Create a new spawn timer
@@ -128,7 +137,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         
         // Get high scores and check if player score is greater
         if score > 0 {
-            var highScores = userDefaults.dictionary(forKey: "HighScoresDict") as! [String:Int]
+            let highScores = userDefaults.dictionary(forKey: "HighScoresDict") as! [String:Int]
             // If there are 5 high scores, remove the lowest
             if highScores.count == 5 {
                 let lowestScore = highScores.min { a, b in a.value < b.value }
@@ -141,7 +150,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         }
         
         // Show the game over screen
-        isShowingGameOverScreen = true
+//        InterfaceControls.isShowingGameOverScreen = true
+        InterfaceControls.interfaceState = .gameOver
+        reload.toggle()
+        
         // Stop the spawn timer and spawn rate timer
         spawnTimer?.invalidate()
         spawnRateIncreaseTimer?.invalidate()
@@ -290,7 +302,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     
     func playPauseSound() {
         var pauseSoundUrl:URL?
-        if showPauseView == false {
+        if InterfaceControls.interfaceState != .paused {
             pauseSoundUrl = Bundle.main.url(forResource: "pauseOff", withExtension: "wav")
         } else {
             pauseSoundUrl = Bundle.main.url(forResource: "pauseOn", withExtension: "wav")
