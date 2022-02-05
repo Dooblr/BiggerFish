@@ -19,4 +19,6 @@ enum InterfaceState {
 class InterfaceControls: ObservableObject {
     
     static var interfaceState:InterfaceState = .title
+    
+    static var levelUp = false
 }

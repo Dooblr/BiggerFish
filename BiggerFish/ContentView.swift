@@ -15,10 +15,13 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
+            
             // Game view
             SpriteView(scene: gameScene)
+//                .allowsTransparency = true
                 .ignoresSafeArea()
                 .zIndex(-1)
+                .background(.clear)
             
             // Score Overlay
             if InterfaceControls.interfaceState != .title && InterfaceControls.interfaceState != .highScores {
@@ -27,9 +30,9 @@ struct ContentView: View {
             // Title screen
             if InterfaceControls.interfaceState == .title {
                 TitleView()
-            // Game over overlay
             }
             
+            // Game over overlay
             if InterfaceControls.interfaceState == .gameOver {
                 GameOverView()
             }
@@ -42,6 +45,11 @@ struct ContentView: View {
             // High Scores
             if InterfaceControls.interfaceState == .highScores {
                 HighScoresView()
+            }
+            
+            // Level up text
+            if InterfaceControls.levelUp == true {
+                LevelUpView()
             }
         }
     }

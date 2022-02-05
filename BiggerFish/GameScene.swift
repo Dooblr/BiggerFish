@@ -26,49 +26,72 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     // Player node
     let player = SKSpriteNode(imageNamed: "fishTile_072")
 
-    
-//    @Published var showPauseView = false
     @Published var isHighScore = false
     @Published var highScoreNameInput = ""
     @Published var score = 0
-    // Triggers UI reload from static InterfaceControls changes
+    @Published var level = 1
+    // Triggers UI reload from InterfaceControls changes
     @Published var reload = false
     
     var runCount = 0
     var spawnTimerInterval = 3.0
     var spawnTimer:Timer?
     var spawnRateIncreaseTimer:Timer?
+    var initialPlayerSize:CGSize?
+    
+    // Camera zoom
+    var zoomAmount = 1.0
     
     // Audio players
     var backgroundAudioPlayer:AVAudioPlayer?
     var foregroundAudioPlayer:AVAudioPlayer?
     var interfaceAudioPlayer:AVAudioPlayer?
     
+    // Camera
+    var cameraNode = SKCameraNode()
+    
     // User defaults reference
     let userDefaults = UserDefaults.standard
     
     override func didMove(to view: SKView) {
         
+        // Set initial player size
+        initialPlayerSize = player.size
+        
+        // Set SKScene size to device dimensions
+        self.size = CGSize(width: UIScreen.main.bounds.width,
+                           height: UIScreen.main.bounds.height)
+        
+        // Set an empty dictionary if userdefaults "HighScoresDict" hasn't already been set
         if userDefaults.dictionary(forKey: "HighScoresDict") == nil {
             let emptyDict = [String:Int]()
             userDefaults.set(emptyDict, forKey: "HighScoresDict")
         }
         
-        playBackgroundMusic()
+        // Start audio
+        playBackgroundAudio()
         
+        // Set gravity to zero
         physicsWorld.gravity = .zero
+        
+        // Use this class as the delegate for collisions
         physicsWorld.contactDelegate = self
         
-        self.size = CGSize(width: UIScreen.main.bounds.width,
-                           height: UIScreen.main.bounds.height)
-        
+        // Start gathering accelerometer data
         motionManager.startAccelerometerUpdates()
         
+        // Create visuals
         createGradient()
         createBubbles()
+        
+        // Set camera for zooming
+//        cameraNode.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2)
+//        self.addChild(cameraNode)
+//        self.camera = cameraNode
     }
     
     override func update(_ currentTime: TimeInterval) {
+        
         // Track motion
         if let accelerometerData = motionManager.accelerometerData {
             player.position.x += CGFloat(accelerometerData.acceleration.x * 50)
@@ -81,16 +104,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         }
     }
     
+    // Pause on touch
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         // Only run this code while game is playing or paused
         if InterfaceControls.interfaceState == .playing || InterfaceControls.interfaceState == .paused {
+            
             // If game is paused, switch it to playing, and vice versa
             if InterfaceControls.interfaceState == .paused {
                 InterfaceControls.interfaceState = .playing
+                createTimers()
             } else {
                 InterfaceControls.interfaceState = .paused
+                stopTimers()
             }
+            
+            // Pause timers
+//            spawnTimer.invalidate()
             
             // Trigger interface reload
             reload.toggle()
@@ -103,14 +133,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         }
     }
     
+    // MARK: - Game events
+    
     // Creates player and starts creating enemies
     func startGame() {
         
         // Reset spawn interval
         spawnTimerInterval = 3.0
         
-        // Reset score
+        // Reset score and level
         score = 0
+        level = 1
         
         // Remove any enemy nodes left from a previous game
         for child in children {
@@ -122,17 +155,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         // Create player
         createPlayer()
         
-        // Create a new spawn timer
-        spawnTimer = Timer.scheduledTimer(timeInterval: spawnTimerInterval, target: self, selector: #selector(spawnTimerFunc), userInfo: nil, repeats: true)
-        
-        // Create a spawn rate increase timer
-        spawnRateIncreaseTimer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(increaseSpawnRate), userInfo: nil, repeats: true)
+        // Start timers
+        createTimers()
     }
     
-    func gameOver(){
+    func gameOver() {
+        
         // Death audio
         playDeathSound()
-        // Remove the player
+        
+        // Remove the player from the scene
         player.removeFromParent()
         
         // Get high scores and check if player score is greater
@@ -150,14 +182,58 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         }
         
         // Show the game over screen
-//        InterfaceControls.isShowingGameOverScreen = true
         InterfaceControls.interfaceState = .gameOver
         reload.toggle()
         
-        // Stop the spawn timer and spawn rate timer
-        spawnTimer?.invalidate()
-        spawnRateIncreaseTimer?.invalidate()
+        // Stop timers
+        stopTimers()
     }
+    
+    func levelUp() {
+        
+        let playerSize = player.size
+        let sizeDifferential = initialPlayerSize!.width / playerSize.width
+        
+        // Scale player, enemies, and bubbles
+        for node in self.children {
+            if node.name == "player" {
+                let action = SKAction.scale(to: initialPlayerSize!, duration: 4)
+                node.run(action)
+            }
+            if node.name == "enemy" {
+                let action = SKAction.scale(by: sizeDifferential, duration: 4)
+                node.run(action)
+            }
+//            if node.name == "bubbles" {
+////                let action = SKAction.scale(by: sizeDifferential, duration: 4)
+////                node.run(action)
+//                let bubbleNode = node as! SKEmitterNode
+////                bubbleNode.particleAction
+////                bubbleNode.particleSize
+////                let newParticleSize = CGSize(width: bubbleNode.particleSize.width * 0.5, height: bubbleNode.particleSize.height * 0.5)
+////                let particleScaleSequence = SKKeyframeSequence(keyframeValues: [bubbleNode.particleSize, newParticleSize], times: [0.0,4.0])
+////                bubbleNode.particleScaleSequence = particleScaleSequence
+//            }
+        }
+        
+        // Zoom camera
+//        let zoomInAction = SKAction.scale(to: 1.5, duration: 4)
+//        cameraNode.run(zoomInAction)
+        
+        // Increment level
+        level += 1
+        
+        // Timer to show level up dialogue
+        InterfaceControls.levelUp = true
+        Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true) { timer in
+            InterfaceControls.levelUp = false
+            self.reload.toggle()
+            timer.invalidate()
+        }
+        
+    }
+    
+    // MARK: - Timers
     
     @objc func increaseSpawnRate() {
         // Decrease the spawn interval
@@ -168,15 +244,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     }
     
     @objc func spawnTimerFunc() {
-        let randomSize = Double.random(in: 0.25...2)
-        let randomSpeed = Double.random(in: 50...200)
-        self.createEnemy(enemyScale: randomSize, enemySpeed: randomSpeed)
+        
+        // Create an enemy with a random size and speed
+        createEnemy()
     }
     
-    // MARK: - Physics/Collision
+    func stopTimers() {
+        // Stop the spawn timer and spawn rate timer
+        spawnTimer?.invalidate()
+        spawnRateIncreaseTimer?.invalidate()
+    }
+    
+    // Creates the spawn timer and spawn rate timer
+    func createTimers() {
+        // Create a new spawn timer
+        spawnTimer = Timer.scheduledTimer(timeInterval: spawnTimerInterval, target: self, selector: #selector(spawnTimerFunc), userInfo: nil, repeats: true)
+        
+        // Create a spawn rate increase timer
+        spawnRateIncreaseTimer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(increaseSpawnRate), userInfo: nil, repeats: true)
+    }
+    
+    // MARK: - Collision
     
     func didBegin(_ contact: SKPhysicsContact) {
         
+        // Use node name to compute a player node and enemy node variable
         var playerNode: SKNode {
             if contact.bodyA.node?.name == "player" {
                 return contact.bodyA.node!
@@ -201,15 +293,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
             return
         }
         
-        // Eat if bigger than 95% of enemy
-        var enemySizeKillMargin = 0.95
+        // Size margin of player:enemy to accept a kill
+        var enemySizeKillMargin = 0.90
         
-        // Fix weird pinkfish hitbox issue
+        // Fix pinkfish hitbox issue
         if enemy?.enemyType == .pinkFish {
             enemySizeKillMargin = 0.70
         }
         
         // Player is bigger than fish
+        // If the player's width or height is greater than the enemy's width or height multiplied by the size margin
         if playerNode.frame.width > (enemyNode.frame.width * enemySizeKillMargin) || playerNode.frame.height > (enemyNode.frame.height * enemySizeKillMargin){
             playGulpSound()
             enemyNode.removeFromParent()
@@ -219,6 +312,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         // Fish is bigger than player
         } else {
             gameOver()
+        }
+        
+        // If player is greater than a third of the screen, trigger a level up
+        if player.size.width > UIScreen.main.bounds.width / 3 {
+            levelUp()
         }
     }
     
@@ -241,11 +339,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         player.physicsBody?.collisionBitMask = CollisionType.enemy.rawValue
         // What collisions trigger a notification
         player.physicsBody?.contactTestBitMask = CollisionType.enemy.rawValue
-//        player.physicsBody?.allowsRotation = false
+        player.physicsBody?.allowsRotation = false
     }
     
-    func createEnemy(enemyScale:Double, enemySpeed:Double) {
-        let enemy = EnemyNode(enemyScale: enemyScale, enemySpeed: enemySpeed)
+    func createEnemy() {
+        let enemy = EnemyNode()
         addChild(enemy)
     }
     
@@ -258,12 +356,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         let startPoint = CGPoint(x: 0.5, y: 0)
         let endPoint = CGPoint(x: 0.5, y: 1)
         
-        let myImage: UIImage = UIImage.gradientImage(withBounds: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width * 2, height: UIScreen.main.bounds.height * 2),
-                                                     startPoint: startPoint, endPoint: endPoint, colors: [color1, color2])
-        let gradientTexture = SKTexture(image: myImage)
+        let gradientImage: UIImage = UIImage.gradientImage(withBounds: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width * 2, height: UIScreen.main.bounds.height * 2),
+                                                     startPoint: startPoint,
+                                                     endPoint: endPoint,
+                                                     colors: [color1, color2])
+        
+        let gradientTexture = SKTexture(image: gradientImage)
         let gradientNode = SKSpriteNode(texture: gradientTexture)
         gradientNode.zPosition = -2
+        gradientNode.name = "gradient"
         addChild(gradientNode)
+        
     }
     
     func createBubbles() {
@@ -273,13 +376,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
             bubbles.zPosition = -1
             // Advance particle simulation so stars fill screen on launch
             bubbles.advanceSimulationTime(60)
+            bubbles.name = "bubbles"
             addChild(bubbles)
         }
     }
     
     // MARK: - Audio
     
-    func playBackgroundMusic() {
+    func playBackgroundAudio() {
         let backgroundMusicUrl = Bundle.main.url(forResource: "bubble", withExtension: "mp3")
         try! backgroundAudioPlayer = AVAudioPlayer(contentsOf: backgroundMusicUrl!)
         backgroundAudioPlayer?.volume = 0.5
@@ -294,6 +398,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     }
     
     func playGulpSound() {
+        // Picks a random number and plays gulp sound + the number
         let randomGulpNumber = Int.random(in: 0...4)
         let gulpSoundUrl = Bundle.main.url(forResource: "gulp\(randomGulpNumber)", withExtension: "mp3")
         try! foregroundAudioPlayer = AVAudioPlayer(contentsOf: gulpSoundUrl!)
@@ -302,10 +407,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     
     func playPauseSound() {
         var pauseSoundUrl:URL?
-        if InterfaceControls.interfaceState != .paused {
-            pauseSoundUrl = Bundle.main.url(forResource: "pauseOff", withExtension: "wav")
-        } else {
+        if InterfaceControls.interfaceState == .paused {
             pauseSoundUrl = Bundle.main.url(forResource: "pauseOn", withExtension: "wav")
+        } else {
+            pauseSoundUrl = Bundle.main.url(forResource: "pauseOff", withExtension: "wav")
         }
         try! interfaceAudioPlayer = AVAudioPlayer(contentsOf: pauseSoundUrl!)
         interfaceAudioPlayer?.volume = 0.7

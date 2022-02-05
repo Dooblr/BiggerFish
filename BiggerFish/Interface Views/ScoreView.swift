@@ -16,9 +16,10 @@ struct ScoreView: View {
             Spacer()
             HStack{
                 Spacer()
-                Text("Score: \(gameScene.score)").bold()
-                    .padding()
-                
+                VStack {
+                    Text("Score: \(gameScene.score)").bold()
+                    Text("Level: \(gameScene.level)").bold()
+                }.padding()
             }
         }
     }

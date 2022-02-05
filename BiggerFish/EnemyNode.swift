@@ -22,11 +22,13 @@ class EnemyNode: SKSpriteNode {
     
     var enemyScale:Double
     var enemySpeed:Double
+    
     var enemyType:EnemyTypes
     
-    init(enemyScale:Double,enemySpeed:Double) {
-        self.enemyScale = enemyScale
-        self.enemySpeed = enemySpeed
+    init() {
+
+        self.enemyScale = Double.random(in: 0.25...2)
+        self.enemySpeed = Double.random(in: 50...200)
         
         var fishId = ""
         
